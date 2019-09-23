@@ -27,9 +27,9 @@ sess = zju(username, password)
 try:
     sess.login()
     sess.go(resp)
-	print(resp)
+    print(resp)
 except Exception as e:
-	raise e
+    raise e
 ```
 
 ## Snapshots
