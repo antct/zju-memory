@@ -25,7 +25,7 @@ password = ''
 resp = {}
 sess = zju(username, password)
 try:
-	sess.login()
+    sess.login()
 	sess.go(resp)
 	print(resp)
 except Exception as e:
