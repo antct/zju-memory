@@ -35,9 +35,3 @@ except Exception as e:
 ## Snapshots
 
 紫金港竺像 - 玉泉毛像 - 紫金港启真湖 - 之江礼堂 - 华家池水 - 西溪图书馆 - 海宁一角 - 舟山灯塔
-
-![](./snapshots/1.jpg) ![](./snapshots/2.jpg) ![](./snapshots/3.jpg)
-
-![](./snapshots/4.jpg) ![](./snapshots/5.jpg) ![](./snapshots/6.jpg)
-
-![](./snapshots/7.jpg) ![](./snapshots/8.jpg) ![](./snapshots/9.jpg)
