@@ -106,6 +106,6 @@ venv.bak/
 # vscode
 .vscode/
 
-# custom
-redis/
-test.py
+# app
+app/redis/
+app/config.ini

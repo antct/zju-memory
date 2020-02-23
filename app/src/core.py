@@ -15,7 +15,7 @@ import queue
 import traceback
 # import gevent
 from io import BytesIO
-from myredis import myredis
+from .myredis import myredis
 
 myredis = myredis(redis_type=0)
 

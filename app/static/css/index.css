@@ -1,0 +1,422 @@
+html,
+body {
+    height     : 100%;
+    font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, PingFang SC, Microsoft YaHei, Source Han Sans SC, Noto Sans CJK SC, WenQuanYi Micro Hei, sans-serif;
+    font-weight: bold;
+    font-size  : 14px;
+    margin     : 0px;
+}
+
+#swiper-container {
+    width     : 100%;
+    height    : 100%;
+    margin    : 0 auto;
+    max-width : 400px;
+    max-height: 700px;
+    text-align: center;
+    overflow  : hidden;
+}
+
+/* up arrow */
+.arrow {
+    width     : 2rem;
+    height    : 2rem;
+    position  : fixed;
+    bottom    : 2.5rem;
+    left      : 50%;
+    transform : translate3d(-50%, 0, 0);
+    z-index   : 999;
+    background: none;
+    border    : none;
+    padding   : 0;
+    animation : upArrowAni 2s infinite linear;
+}
+
+.arrow i {
+    width         : 2rem;
+    height        : 2rem;
+    text-align    : center;
+    line-height   : 2rem;
+    /* color      : #ffffff; */
+    font-size     : 1.5rem;
+}
+
+@keyframes upArrowAni {
+    0% {
+        opacity  : 0;
+        transform: translate3d(-50%, 30%, 0);
+    }
+
+    30% {
+        opacity  : 1;
+        transform: translate3d(-50%, -20%, 0);
+    }
+
+    60% {
+        opacity  : 0;
+        transform: translate3d(-50%, -35%, 0);
+    }
+
+    100% {
+        opacity  : 0;
+        transform: translate3d(-50%, -50%, 0);
+    }
+}
+
+/* music */
+.music {
+    position        : absolute;
+    right           : 1rem;
+    top             : 1rem;
+    width           : 2rem;
+    height          : 2rem;
+    background-image: url('../images/music.png');
+    background-size : 2rem;
+    z-index         : 99;
+}
+
+.music.play {
+    background-image : url('../images/music.png');
+    -webkit-animation: rotate 3.82s linear infinite;
+    animation        : rotate 3.82s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+        -webkit-transform: rotate(0deg)
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg)
+    }
+}
+
+h3,
+h4 {
+    margin     : 0;
+    font-weight: bold;
+    color      : #ffffff;
+}
+
+.slogan {
+    position   : absolute;
+    color      : #ffffff;
+    font-size  : 1.0rem;
+    font-weight: bold;
+    bottom     : 1rem;
+    width      : 20rem;
+    left       : -10rem;
+    margin-left: 50%;
+}
+
+/* start page */
+.start-page {
+    background-image: url(../images/2.jpeg);
+    background-size : 100% 100%;
+}
+
+.start-page .card {
+    margin-top                : 30%;
+    margin-left               : 10%;
+    width                     : 80%;
+    background-color          : rgba(244, 243, 158, 0.7);
+    background-size           : cover;
+    text-align                : center;
+    font-size                 : 1rem;
+    padding                   : 0.5rem 0.5rem;
+    border-bottom-left-radius : 20px 500px;
+    border-bottom-right-radius: 500px 30px;
+    border-top-right-radius   : 5px 100px;
+    box-shadow                : 0 2px 10px 1px rgba(61, 45, 45, 0.2);
+    text-shadow               : 0 1px 0 #F6EF97;
+    /* min-height                : 50%; */
+}
+
+.start-page .slogan {
+    color: #000000;
+}
+
+/* ecard */
+.ecard-page {
+    background-image: url(../images/3.jpeg);
+    background-size : 100% 100%;
+}
+
+.ecard-page .card1 {
+    margin-top      : 20%;
+    background-color: rgba(248, 248, 248, 0.9);
+    background-size : cover;
+    text-align      : left;
+    max-width       : 80%;
+    margin-left     : 1.0rem;
+    padding         : 0.5rem 1.0rem;
+}
+
+.ecard-page .card2 {
+    margin-top      : 15%;
+    background-color: rgba(248, 248, 248, 0.9);
+    background-size : cover;
+    float           : right;
+    max-width       : 70%;
+    text-align      : right;
+    margin-right    : 1.0rem;
+    padding         : 0.5rem 1.0rem;
+}
+
+.ecard-page .card1 .normal,
+.ecard-page .card2 .normal {
+    color    : #000000;
+    font-size: 1.0rem;
+}
+
+.ecard-page .card1 .blue,
+.ecard-page .card2 .blue {
+    color: #1661ab;
+}
+
+.ecard-page .card1 .big,
+.ecard-page .card2 .big {
+    font-size: 1.5rem;
+}
+
+.ecard-page .slogan {
+    color: #ffffff;
+}
+
+/* jwbinfosys */
+.jwbinfosys-page {
+    background-image: url(../images/4.jpeg);
+    background-size : 100% 100%;
+}
+
+.jwbinfosys-page #course-error {
+    margin-top: 60%;
+}
+
+.jwbinfosys-page img {
+    position: absolute;
+    width   : 100%;
+    height  : 100%;
+}
+
+.jwbinfosys-page .card {
+    margin-top      : 20%;
+    width           : 80%;
+    background-color: rgba(248, 248, 248, 0.9);
+    font-size       : 1rem;
+    position        : absolute;
+    text-align      : left;
+}
+
+.jwbinfosys-page .inner {
+    margin   : 1.5rem;
+    color    : rgb(95, 95, 95);
+    font-size: 1.0rem;
+}
+
+.jwbinfosys-page .inner span {
+    color: #7d00fe
+}
+
+.jwbinfosys-page .inner .big {
+    font-size: 1.5rem;
+}
+
+.jwbinfosys-page .slogan {
+    color: #ffffff;
+}
+
+/* cc98 */
+.cc98-page {
+    background-image: url(../images/5.jpeg);
+    background-size : 100% 100%;
+}
+
+.cc98-page .card {
+    margin          : 20% auto;
+    background-color: rgba(248, 248, 248, 0.8);
+    width           : 75%;
+    padding         : 1rem 1rem;
+}
+
+
+.cc98-page .content {
+    color    : #000000;
+    font-size: 1.0rem;
+    padding  : 0.5rem 0;
+}
+
+.cc98-page .content .big {
+    font-size: 1.5rem;
+}
+
+.cc98-page .content span {
+    color: #f28e16;
+}
+
+.cc98-page img {
+    width        : 100px;
+    height       : 100px;
+    border-radius: 100%;
+}
+
+.cc98-page .slogan {
+    color: #000000;
+}
+
+
+/* sport */
+.sport-page {
+    background-image: url(../images/6.jpeg);
+    background-size : 100% 100%;
+}
+
+.sport-page .card {
+    padding-top: 20%;
+    width      : 100%;
+    height     : 100%;
+}
+
+.sport-page .card .chart {
+    background-color   : rgba(248, 248, 248, 0.7);
+    /* margin-left     : 1.0rem; */
+    width              : 100%;
+    height             : 27%;
+    margin-bottom      : 6%;
+}
+
+
+.sport-page .card1 {
+    clear           : both;
+    background-color: rgba(248, 248, 248, 0.9);
+    background-size : cover;
+    margin-top      : 2%;
+    margin-left     : 1.0rem;
+    text-align      : left;
+    max-width       : 65%;
+    float           : left;
+    padding         : 0.5rem 1.0rem;
+}
+
+.sport-page .card2 {
+    clear           : both;
+    background-color: rgba(248, 248, 248, 0.9);
+    background-size : cover;
+    margin-top      : 2%;
+    margin-right    : 1.0rem;
+    text-align      : right;
+    max-width       : 65%;
+    float           : right;
+    padding         : 0.5rem 1.0rem;
+    /* border-radius: 0.05rem; */
+}
+
+.sport-page .card1,
+.sport-page .card2 {
+    font-size: 1.0rem;
+}
+
+.sport-page .card1 .big,
+.sport-page .card2 .big {
+    font-size: 1.5rem;
+}
+
+.sport-page .card1 .blue,
+.sport-page .card2 .blue {
+    color: #1661ab;
+}
+
+.sport-page .slogan {
+    color: #000000;
+}
+
+
+.library-page {
+    background-image: url(../images/7.jpeg);
+    background-size : 100% 100%;
+}
+
+.library-page .card {
+    margin-top: 20%;
+    color     : #ffffff;
+}
+
+.library-page .card1 {
+    background-color: rgba(1, 136, 251, 0.9);
+    background-size : cover;
+    margin-bottom   : 5%;
+    margin-left     : 1.0rem;
+    text-align      : left;
+    border-radius   : 5px;
+    max-width       : 80%;
+    float           : left;
+    padding         : 0.5rem 1.0rem;
+}
+
+.library-page .card2 {
+    clear           : both;
+    background-color: rgba(1, 136, 251, 0.9);
+    background-size : cover;
+    margin-bottom   : 5%;
+    margin-right    : 1.0rem;
+    text-align      : right;
+    border-radius   : 5px;
+    max-width       : 80%;
+    float           : right;
+    padding         : 0.5rem 1.0rem;
+}
+
+.library-page .left-jiao {
+    position    : absolute;
+    top         : 0.5rem;
+    left        : -1.0rem;
+    width       : 0;
+    height      : 0;
+    font-size   : 0;
+    border      : solid 0.5rem;
+    border-color: transparent rgba(1, 136, 251, 0.9) transparent transparent;
+}
+
+.library-page .right-jiao {
+    position    : absolute;
+    top         : 0.5rem;
+    right       : -1.0rem;
+    width       : 0;
+    height      : 0;
+    font-size   : 0;
+    border      : solid 0.5rem;
+    border-color: transparent transparent transparent rgba(1, 136, 251, 0.9);
+}
+
+.library-page .card1 span,
+.library-page .card2 span {
+    color    : #efafad;
+    font-size: 1.0rem;
+}
+
+.library-page .card #library-none {
+    padding-top: 40%;
+}
+
+.library-page .slogan {
+    color: #000000;
+}
+
+/* social page */
+.social-page {
+    background-image: url(../images/8.jpeg);
+    background-size : 100% 100%;
+}
+
+.social-page .card {
+    background-color: rgba(248, 248, 248, 0.8);
+    background-size : cover;
+    margin          : 20% auto;
+    width           : 80%;
+    padding         : 1.0rem 1.0rem;
+    text-align      : center;
+}
+
+.social-page .slogan {
+    color: #000000;
+}

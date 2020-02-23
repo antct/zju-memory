@@ -3,7 +3,8 @@ import datetime
 import os
 import redis
 
-base_path = os.path.dirname(__file__)
+# base_path = os.path.dirname(__file__)
+base_path = '.'
 
 # redis lock wrapper for safe thread
 def redis_lock(func):
@@ -41,7 +42,6 @@ class myredis():
                 db=1,
                 decode_responses=True
             )
-            self._conn.flushdb()
 
     @redis_lock
     def setex(self, key, value, ex=None):
