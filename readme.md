@@ -11,10 +11,10 @@
 
 ## run
 
-> fill in app/config.ini first
+> fill in `memory/config.ini` first
 
 ```bash
-cd app
+cd memory
 virtualenv venv
 source venv/bin/activate
 pip install -r requirements.txt

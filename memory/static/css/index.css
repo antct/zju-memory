@@ -7,12 +7,173 @@ body {
     margin     : 0px;
 }
 
+#root-container {
+    width          : 100%;
+    height         : 100%;
+    display        : flex;
+    flex-direction : column;
+    justify-content: center;
+    align-items    : center;
+    max-width      : 500px;
+    margin         : auto;
+    background     : url(../images/1.jpeg) 0 0 / 100% 100% no-repeat;
+}
+
+#loading {
+    position  : fixed;
+    top       : 0;
+    left      : 0;
+    width     : 100%;
+    height    : 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index   : 15000;
+    text-align: center;
+}
+
+#loading img {
+    position   : absolute;
+    top        : 50%;
+    left       : 50%;
+    width      : 50px;
+    height     : 50px;
+    margin-top : -25px;
+    margin-left: -25px;
+}
+
+#loading span {
+    position   : absolute;
+    top        : 50%;
+    left       : 50%;
+    color      : #ffffff;
+    width      : 400px;
+    height     : 50px;
+    margin-top : 25px;
+    margin-left: -200px;
+}
+
+#logo {
+    width      : 25%;
+    padding-top: 0%;
+}
+
+.form {
+    padding-top: 10%;
+}
+
+.form-group {
+    position: relative;
+}
+
+.form-group>.form-control {
+    z-index           : 3;
+    position          : relative;
+    width             : 100%;
+    border            : 0px;
+    border-bottom     : 1px solid #777;
+    padding-top       : 15px;
+    font-size         : 1rem;
+    background        : none;
+    box-sizing        : border-box;
+    outline           : none;
+    display           : inline-block;
+    -webkit-transition: 0.3s;
+    transition        : 0.3s;
+}
+
+.form-group>.form-label {
+    z-index           : 1;
+    position          : absolute;
+    bottom            : 5px;
+    left              : 0;
+    font-size         : 1rem;
+    -webkit-transition: 0.3s;
+    transition        : 0.3s;
+}
+
+.form-group> :first-child {
+    margin-bottom: 5px;
+}
+
+.form-group>.form-control:focus,
+.form-group>.form-control:valid {
+    background-color: rgba(232, 240, 254, 0.7) !important;
+    background-image: none !important;
+    color           : rgb(0, 0, 0) !important;
+    box-shadow      : 0 1px #c21f30;
+    border-color    : #c21f30;
+}
+
+.form-group>.form-control:focus+.form-label,
+.form-group>.form-control:valid+.form-label {
+    font-size        : 12px;
+    -ms-transform    : translateY(-18px);
+    -webkit-transform: translateY(-18px);
+    transform        : translateY(-18px);
+}
+
+.btns {
+    z-index        : 1;
+    height         : 50px;
+    text-align     : center;
+    display        : flex;
+    align-items    : center;
+    justify-content: center;
+}
+
+.btns button {
+    position     : relative;
+    width        : 25px;
+    height       : 25px;
+    margin       : 0 10px;
+    border       : 0px solid #D2332D;
+    border-radius: 50%;
+    outline      : none;
+    text-align   : center;
+    background   : #D2332D;
+    font-size    : 14px;
+    color        : #ffffff;
+}
+
+.form-btn {
+    margin-top   : 5%;
+    width        : 50px;
+    height       : 50px;
+    background   : #D2332D;
+    border       : 0px solid #D2332D;
+    border-radius: 50%;
+    outline      : none;
+    font-size    : 14px;
+    color        : #ffffff;
+    background   : #D2332D url(../images/open.png) no-repeat scroll 15px 15px / 20px 20px;
+}
+
+.notice {
+    position       : relative;
+    display        : none;
+    z-index        : 4;
+    background-size: cover;
+    text-align     : left;
+    padding        : 0.5rem 0.5rem;
+}
+
+.notice span a {
+    color: #D2332D;
+}
+
+#qr {
+    text-align: center;
+}
+
+#qrimg {
+    margin: 0 auto;
+    width : 200px;
+}
+
 #swiper-container {
     width     : 100%;
     height    : 100%;
     margin    : 0 auto;
-    max-width : 400px;
-    max-height: 700px;
+    max-width : 500px;
     text-align: center;
     overflow  : hidden;
 }

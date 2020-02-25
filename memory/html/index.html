@@ -11,27 +11,54 @@
   <meta content="yes" name="apple-touch-fullscreen">
   <title>浙大记忆</title>
 
-  <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  <link href="https://cdn.bootcss.com/animate.css/3.7.2/animate.min.css" rel="stylesheet">
-  <link href="https://cdn.bootcss.com/Swiper/4.5.1/css/swiper.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css" />
   <link href="static/css/index.css" rel="stylesheet">
 
-  <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdn.bootcss.com/store.js/1.3.20/store.min.js"></script>
-  <script src="https://cdn.bootcss.com/typed.js/2.0.11/typed.min.js"></script>
-  <script src="https://cdn.bootcss.com/Swiper/4.5.1/js/swiper.min.js"></script>
-  <script src="https://cdn.bootcss.com/echarts/4.4.0-rc.1/echarts.min.js"></script>
-
-  <script>
-    let data = '{{ variable|tojson  }}';
-    data = JSON.parse(data);
-    store.set('data', data);
-  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/store.js/1.3.20/store.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.11/typed.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.6.0/echarts.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/layer/2.3/layer.js"></script>
 
   <script src="static/js/index.js"></script>
 </head>
 
 <body>
+  <div id="root-container">
+    <div id="loading" style="display: none;">
+      <div class='loading-content'>
+        <img src="static/images/loading.svg">
+        <span>视网络情况预计5-15秒</span>
+      </div>
+    </div>
+    <img id="logo" src="static/images/logo.png">
+    <section class='form'>
+      <div class="form-group">
+        <input id="username" type="text" autocomplete="off" required class="form-control">
+        <label class="form-label">浙大通行证账号</label>
+      </div>
+      <div class="form-group">
+        <input id="password" type="password" autocomplete="off" required class="form-control">
+        <label class="form-label">密码</label>
+      </div>
+    </section>
+    <button id="login" class='form-btn' onclick="log.login();"></button>
+    <div class='btns'>
+      <button id="qrcode" onclick="log.loginqrcode();"><i class='fa fa-qrcode'></i></button>
+      <a href='https://github.com/conv1d/zju-memory'><button><i class="fa fa-github"></i></button></a>
+      <button id='cache' onclick="log.logincache();"><i class='fa fa-history'></i></button>
+    </div>
+    <section id='qr' class='notice'>
+      <img id='qrimg'></img>
+      <br />
+      <span>仅限 <a href="http://m.zju.edu.cn/_s3/main.psp">我的浙大</a> APP扫码登录</span>
+      <br />
+      <span>请在电脑端打开后扫码</span>
+    </section>
+  </div>
   <div id='swiper-container' style='display: none;'>
     <div class="swiper-wrapper">
       <!-- start page -->
@@ -301,6 +328,8 @@
         </div>
       </div>
       <div class="swiper-slide social-page">
+        <div class="card animated" data-ani-name="zoomIn" data-ani-duration="1s" data-ani-delay="0.0s">
+        </div>
         <div class="slogan">
           谢谢观看
         </div>

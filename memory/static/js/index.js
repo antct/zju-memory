@@ -1,3 +1,4 @@
+// animation control
 let animation = {};
 
 animation.initAnimationItems = () => {
@@ -88,6 +89,8 @@ app.init = function () {
             init: function () {
                 animation.initAnimationItems();
                 animation.playAnimation(this);
+                $("#audio")[0].play();
+                $(".music").toggleClass('play');
             },
             touchMove: (event) => {
                 $(".arrow").hide();
@@ -503,6 +506,160 @@ app.initCC98 = () => {
     }
 }
 
+let log = {};
+
+log.dataCheck = () => {
+    data = store.get('data');
+    if (data === undefined) {
+        return false;
+    } else {
+        if (data['ecard'] === undefined && data['cc98'] === undefined && data['library'] === undefined &&
+            data['sport'] === undefined && data['jwbinfosys'] === undefined && data['basic'] === undefined)
+            return false;
+        else
+            return true;
+    }
+}
+
+log.logincache = () => {
+    if (log.dataCheck()) {
+        app.init();
+    } else {
+        layer.msg('本地数据不完整');
+    }
+}
+
+log.loginqrdata = (token) => {
+    $.ajax({
+        type: "GET",
+        url: "/qrlogin",
+        data: { 'token': token },
+        timeout: 30000,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            $('#loading').hide();
+            layer.msg('网络超时');
+        },
+        success: function (data) {
+            if (data['code'] === 0) {
+                store.set('data', data);
+                app.init();
+            } else {
+                $('#loading').hide();
+                layer.msg("遭遇未知异常");
+            }
+        }
+    });
+}
+
+log.loginqrpoll = (uuid) => {
+    $.ajax({
+        type: "GET",
+        url: "/qrpoll",
+        data: { 'uuid': uuid },
+        timeout: 30000,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            layer.closeAll();
+        },
+        success: function (data) {
+            if (data['code'] === 0) {
+                $('#loading').show();
+                layer.closeAll();
+                log.loginqrdata(data['token']);
+            } else {
+                layer.closeAll();
+            }
+        }
+    });
+}
+
+log.loginqrcode = () => {
+    $("#qrcode").attr('disabled', true);
+    $.ajax({
+        type: "GET",
+        url: "/qrcode",
+        timeout: 30000,
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+            layer.msg("网络超时，获取二维码失败");
+            $("#qrcode").attr('disabled', false);
+        },
+        success: function (data) {
+            if (data['code'] === 0) {
+                var src = data['src'];
+                $("#qrimg").attr('src', 'data:image/jpeg;base64,' + src);
+                // $("#qrimg").show();
+                layer.open({
+                    type: 1,
+                    shade: false,
+                    title: false,
+                    content: $('#qr')
+                });
+                var uuid = data['uuid'];
+                log.loginqrpoll(uuid);
+            } else {
+                layer.msg("获取二维码失败");
+            }
+            $("#qrcode").attr('disabled', false);
+        }
+    });
+}
+
+log.login = () => {
+    let username = $("#username").val();
+    let password = $("#password").val();
+    if (username && password) {
+        $('#loading').show();
+        $.ajax({
+            type: "POST",
+            url: "/login",
+            data: { username: $("#username").val(), password: $("#password").val() },
+            timeout: 40000,
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $('#loading').hide();
+                layer.msg('网络超时，请稍后再试');
+            },
+            success: function (data) {
+                if (data['code'] === 0) {
+                    store.set('data', data);
+                    $('#root-container').hide();
+                    $('#swiper-container').show();
+                    app.init();
+                } else {
+                    $('#loading').hide();
+                    if (data['code'] === -1) {
+                        layer.msg("未知异常");
+                    }
+                    if (data['code'] === 1) {
+                        layer.msg('账号密码不匹配，5次错误锁定10分钟');
+                    }
+                    if (data['code'] === 2) {
+                        layer.msg('账号暂时被锁定，请稍后再试');
+                    }
+                    if (data['code'] === 3) {
+                        layer.msg('登录异常，请稍后再试');
+                    }
+                    if (data['code'] === 4) {
+                        layer.msg('数据异常，请稍后再试');
+                    }
+                }
+            }
+        });
+    } else {
+        if (!password)
+            $("#password").focus();
+        if (!username)
+            $("#username").focus();
+    }
+}
+
 $(document).ready(function () {
-    app.init();
+    layer.open({
+        type: 1,
+        shade: false,
+        title: false,
+        content: $('#warning')
+    });
+    let initHeight = $('body').height();
+    $(window).resize(function () {
+        $('#root-container').height(initHeight);
+    });
 });
