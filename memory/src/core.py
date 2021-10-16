@@ -126,8 +126,8 @@ class zju():
         self._cc98_password = cc98_password
 
         # sport config
-        # two different login way
-        self._sport_login_mode = 0
+        # two different login ways
+        self._sport_login_mode = 1
 
     def _get(self, sess, *args, **kwargs):
         kwargs.update({'timeout': self._timeout})
@@ -971,7 +971,7 @@ class zju():
         
         # zjuam login
         if self._library_login_mode == 0:
-            res = self._get(sess=sess, url='http://webpac.zju.edu.cn/zjusso')
+            res = self._get(sess=sess, url='http://opac.zju.edu.cn/zjusso')
             res.encode = 'utf-8'
         # normal login
         else:
