@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0, maximum-scale=1.0">
+  <meta name="format-detection" content="telephone=no,email=no" />
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="yes" name="apple-touch-fullscreen">
+  <title>浙大记忆</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/css/swiper.min.css" />
+  <link href="static/css/index.css" rel="stylesheet">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/store.js/1.3.20/store.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.11/typed.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.6.0/echarts.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/layer/2.3/layer.js"></script>
+
+  <script src="static/js/index.js"></script>
+</head>
+
+<body>
+  <div id="root-container">
+    <div id="loading" style="display: none;">
+      <div class='loading-content'>
+        <img src="static/images/loading.svg">
+        <span>视网络情况预计5-15秒</span>
+      </div>
+    </div>
+    <img id="logo" src="static/images/logo.png">
+    <section class='form'>
+      <div class="form-group">
+        <input id="username" type="text" autocomplete="off" required class="form-control">
+        <label class="form-label">浙大通行证账号</label>
+      </div>
+      <div class="form-group">
+        <input id="password" type="password" autocomplete="off" required class="form-control">
+        <label class="form-label">密码</label>
+      </div>
+    </section>
+    <button id="login" class='form-btn' onclick="log.login();"></button>
+    <div class='btns'>
+      <button id="qrcode" onclick="log.loginqrcode();"><i class='fa fa-qrcode'></i></button>
+      <a href='https://github.com/conv1d/zju-memory'><button><i class="fa fa-github"></i></button></a>
+      <button id='cache' onclick="log.logincache();"><i class='fa fa-history'></i></button>
+    </div>
+    <section id='qr' class='notice'>
+      <img id='qrimg'></img>
+      <br />
+      <span>仅限 <a href="http://m.zju.edu.cn/_s3/main.psp">我的浙大</a> APP扫码登录</span>
+      <br />
+      <span>请在电脑端打开后扫码</span>
+    </section>
+  </div>
+  <div id='swiper-container' style='display: none;'>
+    <div class="swiper-wrapper">
+      <!-- start page -->
+      <div class="swiper-slide start-page">
+        <!-- the word I want to say -->
+        <div class="card animated" data-ani-name="fadeIn" data-ani-duration="1s" data-ani-delay="0.0s">
+          <span id="typed" style="white-space:pre-wrap;"></span>
+        </div>
+        <div class="slogan">
+          向上滑开启你的记忆
+        </div>
+      </div>
+      <!-- ecard -->
+      <div class="swiper-slide ecard-page">
+        <div class="card1 animated" data-ani-name="slideInRight" data-ani-duration="1s" data-ani-delay="0s">
+          <span class='big blue' id='ecard-most-merc-1-count'>*</span> 次
+          <br />
+          你最常去 “<span id='ecard-most-merc-1-mercname' class='normal blue'>****</span>”
+          <br />
+          <span id='ecard-most-merc-2-mercname' class="blue">****</span> 和 <span id='ecard-most-merc-3-mercname'
+            class='blue'>****</span>
+          也是你经常光顾的地方
+          <br />
+          累计在 <span id='ecard-merc-count' class='blue'>*</span> 个地点留下了你的消费足迹
+          <br />
+        </div>
+        <div class="card2 animated" data-ani-name="fadeInLeft" data-ani-duration="1s" data-ani-delay="0.5s">
+          <span class='big blue' id='ecard-most-tranamt-count'>*</span> 元
+          <br />
+          最大的一笔消费发生在
+          <br />
+          <span id='ecard-most-tranamt-place' class='normal blue'>****-**-** ****</span>
+          <br />
+          消费最多的一天是 <span id='ecard-most-day-occtime' class='normal blue'>****-**-**</span>
+          <br />
+          那天你花费了 <span id='ecard-most-day-tranamt' class='normal blue'>*</span> 元
+          <br />
+        </div>
+        <div class="card2 animated" data-ani-name="fadeInLeft" data-ani-duration="1s" data-ani-delay="0.5s">
+          平均每天在食堂消费 <span class='big blue' id='ecard-normal-avg'>*</span> 次
+          <br />
+          <span class='normal blue' id='ecard-most-dining-mercname'>****</span>
+          <br />
+          是你常去的食堂 陪你度过了 <span class='normal blue' id='ecard-most-dining-count'>*</span> 餐
+          <br />
+          <br />
+          你在超市消费 <span id='ecard-market' class="normal blue">*</span> 次 热水刷卡 <span id='ecard-shower'
+            class='normal blue'>*</span>
+          次
+          <br />
+          银行转账 <span id='ecard-bank' class="normal blue">*</span> 次 支付宝充值 <span id='ecard-alipay'
+            class="normal blue">*</span> 次
+          <br />
+          这些数据来自你近 <span id='ecard-day-count' class="blue">*</span> 天消费记录
+        </div>
+        <div class="slogan">
+          留食小乐惠还会再有机会去吗
+        </div>
+      </div>
+      <div class="swiper-slide jwbinfosys-page">
+        <div id="course-error" style="display: none;" class="card animated" data-ani-name="fadeInLeft"
+          data-ani-duration="1.0s" data-ani-delay="0.0s">
+          <div class='inner'>
+            <span id="course-error-text">****</span>
+          </div>
+        </div>
+        <div id="course-normal" class="card animated" data-ani-name="fadeInLeft" data-ani-duration="1.0s"
+          data-ani-delay="0.0s">
+          <div>
+            <div class="inner">
+              <span id='course-total-credit' class='big'>*</span> 学分
+              <br />
+              从 <span id='course-semester-first'>****</span> 到 <span id='course-semester-last'>****</span>
+              <br />
+              你的课表为你记录了 <span id='course-total-count'>*</span> 门课 <span id='course-major-count'>*</span> 门主修
+            </div>
+            <div class="inner">
+              还记得
+              <br />
+              <span id='course-first-teacher'>**</span> 老师的 <span id='course-first-name'>****</span> 吗？
+              <br />
+              <br />
+              那天你匆匆赶到 <span id='course-first-place'>****</span>
+              <br />
+              开始了大学里的第一门课
+            </div>
+            <div id="course-highest" class="inner">
+              <span id='course-highest-course' style="white-space:pre-wrap;">**** ****</span>
+              <br />
+              这是你成绩最好的几门课
+            </div>
+            <div id='course-teacher' class="inner">
+              你一共遇到 <span id='course-teacher-total-count' class='big'>*</span> 位老师
+              <br />
+              <span id='course-teacher-name'>****</span> 老师也许和你最有缘分
+              <br />
+              <span id='course-teacher-course' style="white-space:pre-wrap;">**** ****</span>
+              <br />
+              你上过 <span id="course-teacher-count">*</span> 次他(她)的课
+            </div>
+            <div class="inner">
+              <span id='course-semester-count' class='big'>*</span> 门课
+              <br />
+              <span id='course-semester-name'>****</span> 是你最忙碌的一个学期
+              <br />
+              平均每个学期你上了 <span id='course-semester-avg'>*</span> 门课
+              <br />
+              <!-- <br />
+              熬过的考试周刷过的夜 这些日子可能以后都不会再有 -->
+            </div>
+          </div>
+        </div>
+        <div class="slogan">
+          东区到西区的距离大概是十五分钟
+        </div>
+      </div>
+      <div class="swiper-slide cc98-page">
+        <div class="card animated" data-ani-name="bounceInDown" data-ani-duration="1s" data-ani-delay="0s">
+          <div class='content'>
+            <span class='big' id='cc98-register-time'>****-**-**</span> 那天
+            <br />
+            你正式成为了一个98小萌新
+            <br />
+            <br />
+            还记得你注册的 <span id='cc98-count'>*</span> 个CC98账号吗?
+            <br />
+            <br />
+            你的98生涯里一共
+            <br />
+            登录 <span id='cc98-login-times'>*</span> 次 发帖 <span id='cc98-post-count'>*</span> 次 发言 <span
+              id='cc98-comment-times'>*</span> 次
+            <br />
+            你悄悄关注了 <span id='cc98-follow-count'>*</span> 位用户
+            <br />
+            也有 <span id='cc98-fan-count'>*</span> 个人默默关注着你
+          </div>
+          <img class='animated' id='cc98-avatar' data-ani-name="rotateIn" data-ani-duration="1s" data-ani-delay="1.0s">
+          <div id='cc98-normal' class='content'>
+            <span id='cc98-comment1'>**</span> 如你
+            <br />
+            也会 <span id='cc98-comment2'>****</span>
+            <br />
+            <br />
+            有 <span class='big' id='cc98-like-count'>*</span> 人为你的发言点赞
+            <br />
+            你的行为得到了 <span class='big' id='cc98-pop-count'>*</span> 次赞许
+          </div>
+          <div class='content'>
+            <div id='cc98-post-yes'>
+              你最常在 “<span id='cc98-post-most-board'>****</span>” 板块发帖
+              <br />
+              <span id='cc98-first-topic-time'>****</span> 那天 你发了人生第一个帖子
+              <br />
+              “ <span id='cc98-first-topic-title'>****</span> ”
+              <br />
+            </div>
+            <div id='cc98-post-no' style="display:none;">
+              没有能够查询到你的发帖记录~
+              <br />
+              赶在毕业前去98水一个帖子吧!
+            </div>
+          </div>
+          <div id='cc98-none' class='content' style="display:none;">
+            你的98数据全是空荡荡的一片~
+            <br />
+            毕业前快去注册一个98账号吧!
+            <br />
+          </div>
+        </div>
+        <div class="slogan">
+          今天你上十大了吗
+        </div>
+      </div>
+      <div class="swiper-slide sport-page">
+        <div class='card'>
+          <div id='basic' class="chart animated" data-ani-name="fadeInDown" data-ani-duration="1s"
+            data-ani-delay="0.0s">
+          </div>
+          <div class="card1 animated" data-ani-name="bounceInLeft" data-ani-duration="1s" data-ani-delay="0.5s">
+            <span class='big blue' id='sport-score'>*.*</span>
+            <br />
+            这是你的生涯最高得分~
+          </div>
+          <div class="card2 animated" data-ani-name="bounceInRight" data-ani-duration="1s" data-ani-delay="0.5s">
+            <span class='big blue' id='sport-best-score'>**</span>
+            <br />
+            <span class='' id='sport-best-name'>****</span>可是你的看家本领!
+          </div>
+          <div class="card1 animated" data-ani-name="bounceInLeft" data-ani-duration="1s" data-ani-delay="1.0s">
+            <span class='big blue' id='sport-worst-score'>**</span>
+            <br />
+            你的一生之敌 - <span class='' id='sport-worst-name'>****</span>
+          </div>
+          <div class="card2 animated" data-ani-name="bounceInRight" data-ani-duration="1s" data-ani-delay="1.0s">
+            最快 <span class='big blue' id='sport-run'>*:**</span>
+            <br />
+            <span id='sport-run-comment'>
+              还是当年那个追风少年吗?
+            </span>
+          </div>
+        </div>
+        <div class="slogan">
+          为祖国健康工作五十年
+        </div>
+      </div>
+      <div class="swiper-slide library-page">
+        <div class='card'>
+          <div id='library-normal'>
+            <div class="card1 animated" data-ani-name="rotateInDownLeft" data-ani-duration="1s" data-ani-delay="0.5s">
+              <div class='left-jiao'></div>
+              <span id="library-first-book-date">****-**-**</span> 那天 你借了第一本书
+              <br />
+              <span id="library-first-book-author">****</span> 的 《<span id="library-first-book-name">****</span>》
+            </div>
+            <div class="card2 animated" data-ani-name="rotateInDownRight" data-ani-duration="1s" data-ani-delay="0.5s">
+              <div class='right-jiao'></div>
+              <span id="library-last-book-date">****-**-**</span> 那天 你借了最后一本书
+              <br />
+              <span id="library-last-book-author">****</span> 的 《<span id="library-last-book-name">****</span>》
+            </div>
+            <div class="card1 animated" data-ani-name="rotateInDownLeft" data-ani-duration="1s" data-ani-delay="0.5s">
+              <div class='left-jiao'></div>
+              你的书单里有 <span id="library-total-count">*</span> 本书 涵盖 <span id="library-topic-count">*</span> 个不同主题
+              <br />
+              <span id="library-early-book-author">****</span> 的 《<span id="library-early-book-name">****</span>》 最为久远
+              <br />
+              最厚的一本是 <span id="library-most-page-author">****</span> 的 《<span id="library-most-page-name">未知书籍</span>》
+            </div>
+            <div class="card2 animated" data-ani-name="rotateInDownRight" data-ani-duration="1s" data-ani-delay="0.5s">
+              <div class='right-jiao'></div>
+              《<span id="library-long-book-name">****</span>》 这本书
+              <br />
+              似乎对你特别重要 在你手里停留了 <span id="library-long-book-day">*</span> 天
+            </div>
+            <div class="card1 animated" data-ani-name="rotateInDownRight" data-ani-duration="1s" data-ani-delay="0.5s">
+              <div class='left-jiao'></div>
+              <span id="library-author-name">****</span> 或许是你最喜欢的作者
+              <br />
+              他(她)在你的记录里出现了 <span id="library-author-count">*</span> 次
+            </div>
+            <div class="card2 animated" data-ani-name="rotateInDownRight" data-ani-duration="1s" data-ani-delay="0.5s">
+              <div class='right-jiao'></div>
+              <span id="library-topic-label">****</span>
+              <br />
+              这是你的图书标签
+            </div>
+            <div class="card1 animated" data-ani-name="rotateInDownLeft" data-ani-duration="1s" data-ani-delay="0.5s">
+              <div class='left-jiao'></div>
+              你的足迹遍布 <span id="library-place-count">*</span> 个校图书馆
+              <br />
+              <span id="library-place-name">*****</span> 是你最常借阅的地方
+            </div>
+          </div>
+          <div id='library-none' style='display:none;'>
+            <div class="card1 animated" data-ani-name="rotateInDownLeft" data-ani-duration="1s" data-ani-delay="0.5s">
+              <div class='left-jiao'></div>
+              <div id='library-none-comment1'></div>
+            </div>
+            <div class="card2 animated" data-ani-name="rotateInDownRight" data-ani-duration="1s" data-ani-delay="0.5s">
+              <div class='right-jiao'></div>
+              <div id='library-none-comment2'></div>
+            </div>
+          </div>
+        </div>
+        <div class="slogan">
+          梁祝总会在每晚十点半准时响起
+        </div>
+      </div>
+      <div class="swiper-slide social-page">
+        <div class="card animated" data-ani-name="zoomIn" data-ani-duration="1s" data-ani-delay="0.0s">
+        </div>
+        <div class="slogan">
+          谢谢观看
+        </div>
+      </div>
+    </div>
+    <span class="arrow"><i class="fa fa-angle-double-up" aria-hidden="true"></i></span>
+    <span class="music"><audio id="audio"
+        src='http://music.163.com/song/media/outer/url?id=486188245.mp3'></audio></span>
+  </div>
+</body>
+
+</html>
