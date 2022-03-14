@@ -1,6 +1,6 @@
 # ZJU Memory
 
-![](https://img.shields.io/github/stars/ttcqaq/zju-memory) ![](https://img.shields.io/github/forks/ttcqaq/zju-memory) ![](https://img.shields.io/badge/pv-59292-blue) ![](https://img.shields.io/badge/uv-16280-blue) ![](https://img.shields.io/github/issues/ttcqaq/zju-memory)
+![](https://img.shields.io/github/stars/antct/zju-memory) ![](https://img.shields.io/github/forks/antct/zju-memory) ![](https://img.shields.io/badge/pv-59292-blue) ![](https://img.shields.io/badge/uv-16280-blue) ![](https://img.shields.io/github/issues/antct/zju-memory)
 
 人生到处知何似，应似飞鸿踏雪泥。离开之前，重拾你的浙里记忆。
 
